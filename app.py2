@@ -1,0 +1,15 @@
+\'import streamlit as st;
+import google.generativeai as genai;
+st.title("JARVIS");
+api\_key = st.text\_input("Enter API Key", type="password");
+if api\_key: genai.configure(api\_key=api\_key);
+model = genai.GenerativeModel("gemini-1.5-flash"); 
+if "messages" not in st.session\_state: st.session\_state.messages = \[\];
+for message in st.session\_state.messages: with st.chat\_message(message\["role"\]): st.markdown(message\["content"\]);
+if prompt := st.chat\_input("Say something"): st.session\_state.messages.append({"role": "user", "content": prompt});
+with st.chat\_message("user"): st.markdown(prompt); with st.chat\_message("assistant"): response = model.generate\_content(prompt); 
+st.markdown(response.text);
+st.session\_state.messages.append({"role": "assistant", "content": response.text}'.
+
+
+
